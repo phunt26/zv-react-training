@@ -1,9 +1,9 @@
 import React,{Component} from 'react';
-import '../home/index.css'
+import Modal from '../modal';
 
 class Home extends Component {
     state={
-        open : false
+        open : true
     };
     
     openModal = (e) => {
@@ -26,13 +26,8 @@ class Home extends Component {
                         Open Modal
                     </button>
                 </section>
-                <section style={{display: this.state.open ? 'block' : 'none' }} className="modal-container" id="modal">
-                <div className="modal-content">
-                    <h1>Hello</h1>
-                    <button onClick={this.openModal}>Close Modal</button>
-                </div>
-                 </section>
-            
+
+                <Modal open={this.state.open} onClose={this.openModal} />
             </main>
         );
     }
