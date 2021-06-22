@@ -1,11 +1,9 @@
 import logo from './logo.svg';
-
+import Home from './components/home';
 
 function App() {
   return (
-    <div className="App">
-    
-    </div>
+    <Home></Home>
   );
 }
 

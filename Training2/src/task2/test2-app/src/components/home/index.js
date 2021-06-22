@@ -27,7 +27,10 @@ class Home extends Component {
                     </button>
                 </section>
 
-                <Modal open={this.state.open} onClose={this.openModal} />
+                <Modal open={this.state.open}
+                 onClose={this.openModal} >
+
+                    </Modal>
             </main>
         );
     }

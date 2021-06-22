@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
 import '../modal/index.css';
+
+
 class Modal extends Component {
     onClose = (e) => {
+        console.log( this.props.onClose);
         this.props.onClose && this.props.onClose(e);
     };
 
     render() {
+        console.log(this.props.open);
         if (this.props.open) {
             return null;
         }
