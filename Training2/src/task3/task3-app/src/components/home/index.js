@@ -59,7 +59,7 @@ export default function Home  () {
                  setErrorMessage("Number must be greater than 0");
              }else{
                  update();
-                 setNumber(inputt.current.value);
+                 setNumber(inputt.current.value-0);
                  setErrorMessage("");
                  console.log("ok")
              }
@@ -74,7 +74,10 @@ export default function Home  () {
            console.log(number);
         
            inputt.current.value = number;
-         
+ 
+
+            setNumber(inputt.current.value);
+       
        }
         
     
