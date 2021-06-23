@@ -1,0 +1,19 @@
+.formNumber{
+  text-align-last: center;
+}
+input{
+  padding: 12px 20px;
+margin: 8px 0;
+box-sizing: border-box;
+}
+.btn{
+
+  padding: 16px 20px;
+  border: none;
+  border-radius: 4px;
+  background-color: #f1f1f1;
+}
+
+.numberShow{
+  font-size: 150px;
+}
