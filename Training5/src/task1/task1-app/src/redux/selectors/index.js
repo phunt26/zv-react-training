@@ -1,0 +1,1 @@
+export const todosState$ = (state) => state.todos.data;
