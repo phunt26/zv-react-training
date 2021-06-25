@@ -37,10 +37,7 @@ export default function Todo(props){
           if(data.name)
           {
               console.log(id);
-            
-        setData({
-            id:'cccc'
-          })
+            setData({ id: id });
             console.log(data.id);
                 dispatch(updateTodo.updateTodoRequest(data));
 
