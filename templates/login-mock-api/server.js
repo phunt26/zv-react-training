@@ -46,12 +46,7 @@ router.post('/login', async function(req, res) {
     });
   }
 
-  const payload = {
-    fullName: user.fullName,
-    email: user.email,
-    role: user.role,
-    id: user.id,
-  }
+  
 
 
   try {
