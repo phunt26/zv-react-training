@@ -29,10 +29,27 @@ export default function todosReducers(state = INIT_STATE.todos,action){
                     data : [...state.data,action.payload],
                 };
                 case getType(updateTodo.updateTodoSuccess):
+                 let x= 1;
+                 let dataa = [...state.data]
+                for(var i=0;i<state.data.length;i++)
+                {
+                    if(state.data[i].id == action.payload.id)
+                    {
+                        x = i;
+                        dataa[i].name = action.payload.name;
+                    }
+                }
+                
                     return {
                         ...state,
-                        data : [...state.data,action.payload],
+                        data : [
+                            ...dataa,
+                            ],
                     };
+
+                  
+                       
+     
      default:
      return state;
  }

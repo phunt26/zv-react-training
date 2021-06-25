@@ -57,6 +57,7 @@ const apiMiddleware = (store) => (next) => (action) => {
       axios.put(`http://localhost:9000/todos/${action.payload.id}`, action.payload)
         .then(res => {
 
+          console.log(res.data);
           // successfully received data, dispatch a new action with our data
           store.dispatch(actions.updateTodo.updateTodoSuccess(res.data))
         })

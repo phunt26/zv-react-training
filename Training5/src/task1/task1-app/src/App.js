@@ -9,7 +9,7 @@ import { fetchMovies } from './redux/reducers/todos';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleDown, faAngleUp, faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 import CreateTodo from './component/createTodo';
-
+import Todo from './component/toDo';
 
 function App() {
   const [keyword, setKeyword] = useState('');
@@ -21,6 +21,7 @@ function App() {
   const [isListOpen, setisListOpen] = useState(false)
   const [query, setQuery] = useState('');
   const [isComplete, setisComplete] = useState(false);
+  const [isEditOpen,setisEditOpen]  = useState(false);
   const [filter, setFilter] = useState({
     menu: [
 
@@ -40,7 +41,12 @@ function App() {
       },
 
     ]
-  })
+  });
+  const [data, setData] = React.useState({
+    id:'',
+    name: '',
+   
+  });
 
   React.useEffect(() => {
     console.log("load");
@@ -85,6 +91,10 @@ function App() {
 
     setisListOpen(current => !current)
   }
+  const onOpen = React.useCallback(()  => {
+    setisEditOpen(current => !current);
+  });
+  
 
   const selectItem = (item) => {
     if (item) {
@@ -186,22 +196,30 @@ function App() {
       </section>
       <CreateTodo />
       <h2>To Do List</h2>
-      {List.map((todo) => (
+      {List.map((todo,i) => (
         <section>
-          <div key={todo._id}  >
+          <div key={i}  >
             <div className="searchs">
               {todo.name}
             </div>
             <button className="dd-wrappers">
               delete
             </button>
-            <button className="dd-wrappers">
+            <button onClick={() => onOpen()} key={i} className="dd-wrappers">
               edit
             </button>
+            <input
+            type="checkbox"
+            checked={todo.completed}
+
+          />
           </div>  
-          {isListOpen && (
-            <input></input>
-          )}
+          <div style={{display: isEditOpen ? 'block' : 'none' }}>
+          <Todo item={todo} />
+          </div>
+    
+         
+          
           
         </section>
 
