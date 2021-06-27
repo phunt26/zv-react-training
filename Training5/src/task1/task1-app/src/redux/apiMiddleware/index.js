@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 import * as actions from '../actions';
-import { updateTodo, createTodo, getTodos, getType } from "../actions";
+import { updateTodo, createTodo, getTodos, getType ,deleteTodo} from "../actions";
 
 const apiMiddleware = (store) => (next) => (action) => {
 
@@ -9,7 +9,7 @@ const apiMiddleware = (store) => (next) => (action) => {
   // log the updated state, after calling next(action)
 
   switch (action.type) {
-    ///get post
+    ///----------------------------get post
     case getType(getTodos.getTodosRequest):
       next(action)
       axios.get(`http://localhost:9000/todos`)
@@ -26,7 +26,7 @@ const apiMiddleware = (store) => (next) => (action) => {
           })
         })
       break
-/////add todo
+/////-------------------------------add todo
     case getType(createTodo.createPostRequest):
       // continue propagating the action through redux
       // this is our only call to next in this middleware
@@ -47,7 +47,7 @@ const apiMiddleware = (store) => (next) => (action) => {
           })
         })
       break
-///edit todo
+  ///-------------------------------edit todo
     case getType(updateTodo.updateTodoRequest):
       // continue propagating the action through redux
       // this is our only call to next in this middleware
@@ -69,6 +69,28 @@ const apiMiddleware = (store) => (next) => (action) => {
           })
         })
       break
+  /////-------------------------------Delete todo
+  case getType(deleteTodo.deleteTodoRequest):
+    // continue propagating the action through redux
+    // this is our only call to next in this middleware
+    next(action)
+        console.log(action.payload)
+    // fetch data from an API that may take a while to respond
+    axios.delete(`http://localhost:9000/todos/${action.payload}`,{ params: { userId })
+      .then(res => {
+
+        console.log(res.data);
+        // successfully received data, dispatch a new action with our data
+        store.dispatch(actions.deleteTodo.deleteTodoSuccess(res.data))
+      })
+      .catch(err => {
+        // received an error from the API, dispatch a new action with an error
+        store.dispatch({
+          type: getType(deleteTodo.deleteTodoFailure),
+          payload: { error: err },
+        })
+      })
+    break
     default:
       next(action)
   }

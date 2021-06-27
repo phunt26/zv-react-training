@@ -45,7 +45,7 @@ export default function CreateTodo(){
        >
          
          {
-            <FontAwesomeIcon  icon={faPlus} size="2x" />
+            <FontAwesomeIcon  icon={faPlus} size="1.5em" />
             }
        </button>
        

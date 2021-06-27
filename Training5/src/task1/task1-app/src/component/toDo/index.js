@@ -1,62 +1,54 @@
-import React,{useEffect, useState} from "react";
+import React, { useEffect, useState } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faPlus  } from "@fortawesome/free-solid-svg-icons";
-import {createTodo,updateTodo}  from '../../redux/actions';
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { createTodo, updateTodo } from '../../redux/actions';
 import { useSelector, useDispatch } from 'react-redux';
 
 
 
-export default function Todo(props){
-   const [data, setData] = useState({
-       id:'',
-        name: '',
-      
-    
-      });
-      const dispatch = useDispatch();
-    
-      const [id,setid] = useState('');
+export default function Todo(props) {
+    const [data, setData] = useState({
+        id: props.item.id,
+        name: props.item.name,
+
+    });
+    const dispatch = useDispatch();
+    const [isEditOpen, setisEditOpen] = useState(props.isShow);
+
+ 
+ 
+        //------------------------------------------  
+   
+
+
+    const handleUpdateTodo = React.useCallback(() => {
+
+        if (data.name) {
+
+
+            dispatch(updateTodo.updateTodoRequest(data));
+
+        }
+
+
+    }, [data, dispatch]);
+
+    //-----------------------------
+    if (props.isShow) {
      
-      React.useEffect(() => {
+        return null;
+    }
 
-        setid(props.item.id);
-    
-    
-      }, [dispatch]);
-
-      const enter = () =>{
-   
-        setData({
-          name:''
-        })
-      }
-
-   
-       const handleUpdateTodo = React.useCallback(() => {
-      
-          if(data.name)
-          {
-              console.log(id);
-            setData({ id: id });
-            console.log(data.id);
-                dispatch(updateTodo.updateTodoRequest(data));
-
-            
-           
-          }
-      
-        enter();
-
-       }, [data, dispatch]);
     return (
+
         <div>
-            <input value={data.name}  onChange={(e) => setData({ ...data, name: e.target.value })} >
+            <input value={data.name} onChange={(e) => setData({ ...data, name: e.target.value })} >
             </input>
-            <button  className="dd-wrappers"   onClick={() => handleUpdateTodo()}>
-              ok
+            <button className="dd-wrappers" onClick={() => handleUpdateTodo()}>
+                ok
             </button>
 
-            </div>
-         
+        </div>
+
     )
 }

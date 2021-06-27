@@ -21,6 +21,11 @@ export const getType =(reduxAction) =>{
     updateTodoSuccess: (payload) => payload,
     updateTodoFailure: (err) =>err, 
  })                   
+ export const deleteTodo =  createActions({
+    deleteTodoRequest:  undefined,
+    deleteTodoSuccess: (payload) => payload,
+    deleteTodoFailure: (err) =>err, 
+ })                   
   
  
  

@@ -21,7 +21,7 @@ function App() {
   const [isListOpen, setisListOpen] = useState(false)
   const [query, setQuery] = useState('');
   const [isComplete, setisComplete] = useState(false);
-  const [isEditOpen,setisEditOpen]  = useState(false);
+  const [isEditOpen,setisEditOpen]  = useState(true);
   const [filter, setFilter] = useState({
     menu: [
 
@@ -91,9 +91,14 @@ function App() {
 
     setisListOpen(current => !current)
   }
-  const onOpen = React.useCallback(()  => {
+  const onOpen = React.useCallback((e)  => {
+    
     setisEditOpen(current => !current);
   });
+  const onDelete = React.useCallback((item)  => {
+
+    dispatch(actions.deleteTodo.deleteTodoRequest(item));
+  },[dispatch]);
   
 
   const selectItem = (item) => {
@@ -158,8 +163,8 @@ function App() {
           >
             <div className="dd-header-title">{headerTitle}</div>
             {isListOpen
-              ? <FontAwesomeIcon icon={faAngleUp} size="2x" />
-              : <FontAwesomeIcon icon={faAngleDown} size="2x" />}
+              ? <FontAwesomeIcon icon={faAngleUp} size="1.5em" />
+              : <FontAwesomeIcon icon={faAngleDown} size="1.5em" />}
           </button>
 
           {isListOpen && (
@@ -186,7 +191,7 @@ function App() {
                 >
                   <label>{item.title}</label>
                   {' '}
-                  {item.selected && <FontAwesomeIcon icon={faCheckCircle} size="2x" />}
+                  {item.selected && <FontAwesomeIcon icon={faCheckCircle} size="1.5em" />}
                 </button>
               ))}
             </div>
@@ -202,7 +207,7 @@ function App() {
             <div className="searchs">
               {todo.name}
             </div>
-            <button className="dd-wrappers">
+            <button onClick={() => onDelete(todo.id)} className="dd-wrappers">
               delete
             </button>
             <button onClick={() => onOpen()} key={i} className="dd-wrappers">
@@ -214,11 +219,11 @@ function App() {
 
           />
           </div>  
-          <div style={{display: isEditOpen ? 'block' : 'none' }}>
-          <Todo item={todo} />
+          <div  >
+          <Todo  item={todo} isShow={isEditOpen} />
           </div>
     
-         
+          
           
           
         </section>

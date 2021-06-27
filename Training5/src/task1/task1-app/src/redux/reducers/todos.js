@@ -1,6 +1,6 @@
 
 import { INIT_STATE } from "../../constant";
-import { updateTodo, getTodos, createTodo,getType } from "../actions";
+import { updateTodo, getTodos,deleteTodo, createTodo,getType } from "../actions";
 
 export default function todosReducers(state = INIT_STATE.todos,action){
  switch(action.type){
@@ -37,6 +37,7 @@ export default function todosReducers(state = INIT_STATE.todos,action){
                     {
                         x = i;
                         dataa[i].name = action.payload.name;
+                        
                     }
                 }
                 
@@ -46,7 +47,9 @@ export default function todosReducers(state = INIT_STATE.todos,action){
                             ...dataa,
                             ],
                     };
-
+                    case getType(deleteTodo.deleteTodoSuccess ) :
+                       
+                       
                   
                        
      
