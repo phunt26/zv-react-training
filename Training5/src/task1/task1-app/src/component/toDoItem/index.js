@@ -21,7 +21,7 @@ export default function ToDoItem(props) {
     });
     const [dataCheck, setDataCheck] = useState({
         id: props.item.id,
-        completed : !props.item.completed,
+        completed : props.item.completed,
        
         
     });
@@ -47,15 +47,23 @@ export default function ToDoItem(props) {
           });
 
        
-          const setChecked = React.useCallback(()  => {
-            console.log(dataCheck.completed);
+          const setChecked = ()  => {
+            console.log("11"+dataCheck.completed);
          
+        
+           
+        
+           updates(dataCheck.completed);
+           console.log("33"+dataCheck.completed);
+            //dispatch(actions.updateTodo.updateTodoRequest(dataCheck));
          
            
-           console.log(dataCheck.completed);
-            dispatch(actions.updateTodo.updateTodoRequest(dataCheck));
-           
-          },[dispatch]);
+          };
+          const updates = (comments) => {
+            console.log("22"+comments);
+      
+              setDataCheck({...dataCheck, completed: !comments})
+          }
     //-----------------------------
 
 
@@ -74,7 +82,7 @@ export default function ToDoItem(props) {
           </button>
           <input
           type="checkbox"
-          checked={props.item.completed}
+          checked={dataCheck.completed}
             onChange={() => setChecked()}
             key={props.item.id}
         />

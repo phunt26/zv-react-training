@@ -20,9 +20,11 @@ function App() {
   const [headerTitle, setheaderTitle] = useState('');
   const [List, setList] = useState([])
   const [isListOpen, setisListOpen] = useState(false)
-  const [query, setQuery] = useState('');
+  const [selectd, setSelected] = useState(false);
   const [isComplete, setisComplete] = useState(false);
- 
+  
+
+
   const [filter, setFilter] = useState({
     menu: [
 
@@ -57,11 +59,42 @@ function App() {
   }, [dispatch]);
 
   React.useEffect(() => {
+   
+    if(selectd)
+    {
+      if (keyword) {
 
+        const results = todoList.filter(person =>
+          person.completed === isComplete
+        );
+        setList(results);
+        const results2 = results.filter(person =>
+          person.name.toLowerCase().includes(keyword)
+        );
+        setList(results2);
 
-    setList(todoList);
+      } else {
+
+        const results = todoList.filter(person =>
+          person.completed === isComplete
+        );
+        setList(results);
+      }
+    }else{
+      if (keyword) {
+
+        const results2 = todoList.filter(person =>
+          person.name.toLowerCase().includes(keyword)
+        );
+        setList(results2);
+
+      } else {
+        setList(todoList);
+      }
+    }
 
   }, [todoList]);
+
 
   function handleInputOnchange(e) {
 
@@ -84,7 +117,7 @@ function App() {
 
 
     } else {
-
+      setList(todoList);
     }
 
   }
@@ -93,16 +126,18 @@ function App() {
     setisListOpen(current => !current)
   }
 
-
   
+   
 
-  const selectItem = (item) => {
+  const selectItem =    (item) => {
+  
     if (item) {
       const { title, id, key, completed } = item;
       setisComplete(completed);
       setheaderTitle(title)
       setisListOpen(false);
       setIsLoading(true);
+      setSelected(true);
       if (keyword) {
 
         const results = todoList.filter(person =>
@@ -127,6 +162,7 @@ function App() {
 
       setisListOpen(false);
       setIsLoading(false);
+      setSelected(false);
       if (keyword) {
 
         const results2 = todoList.filter(person =>
@@ -140,7 +176,7 @@ function App() {
     }
 
 
-  }
+  };
 
 
 
@@ -194,7 +230,7 @@ function App() {
         </div>
 
       </section>
-      <CreateTodo />
+      <CreateTodo  />
       <h2>To Do List</h2>
       {List.map((todo) => (
 

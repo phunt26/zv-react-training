@@ -16,20 +16,25 @@ export default function CreateTodo(){
       const enter = () =>{
    
         setData({
-          name:''
+          name:'',
+          completed: false,
         })
       }
 
       const dispatch = useDispatch();
       
-     
+ 
    
        const handleAddTodo = React.useCallback(() => {
-        console.log(data);
-     
-        dispatch(createTodo.createPostRequest(data));
+      
+        if(data.name)
+        {
+          dispatch(createTodo.createPostRequest(data));
+          enter();
+        }
+       
 
-        enter();
+ 
   
        }, [data, dispatch]);
     return (
