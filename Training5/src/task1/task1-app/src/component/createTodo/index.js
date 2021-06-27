@@ -25,7 +25,7 @@ export default function CreateTodo(){
      
    
        const handleAddTodo = React.useCallback(() => {
-        console.log(data.name);
+        console.log(data);
      
         dispatch(createTodo.createPostRequest(data));
 

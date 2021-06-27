@@ -8,10 +8,11 @@ import { useSelector, useDispatch } from 'react-redux';
 
 export default function Todo(props) {
     const [data, setData] = useState({
-        id: props.item.id,
-        name: props.item.name,
+        id: props.item.item.id,
+        name: props.item.item.name,
 
     });
+  
     const dispatch = useDispatch();
     const [isEditOpen, setisEditOpen] = useState(props.isShow);
 

@@ -10,6 +10,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faAngleDown, faAngleUp, faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 import CreateTodo from './component/createTodo';
 import Todo from './component/toDo';
+import ToDoItem from './component/toDoItem';
 
 function App() {
   const [keyword, setKeyword] = useState('');
@@ -21,7 +22,7 @@ function App() {
   const [isListOpen, setisListOpen] = useState(false)
   const [query, setQuery] = useState('');
   const [isComplete, setisComplete] = useState(false);
-  const [isEditOpen,setisEditOpen]  = useState(true);
+ 
   const [filter, setFilter] = useState({
     menu: [
 
@@ -91,14 +92,8 @@ function App() {
 
     setisListOpen(current => !current)
   }
-  const onOpen = React.useCallback((e)  => {
-    
-    setisEditOpen(current => !current);
-  });
-  const onDelete = React.useCallback((item)  => {
 
-    dispatch(actions.deleteTodo.deleteTodoRequest(item));
-  },[dispatch]);
+
   
 
   const selectItem = (item) => {
@@ -201,33 +196,11 @@ function App() {
       </section>
       <CreateTodo />
       <h2>To Do List</h2>
-      {List.map((todo,i) => (
-        <section>
-          <div key={i}  >
-            <div className="searchs">
-              {todo.name}
-            </div>
-            <button onClick={() => onDelete(todo.id)} className="dd-wrappers">
-              delete
-            </button>
-            <button onClick={() => onOpen()} key={i} className="dd-wrappers">
-              edit
-            </button>
-            <input
-            type="checkbox"
-            checked={todo.completed}
+      {List.map((todo) => (
 
-          />
-          </div>  
-          <div  >
-          <Todo  item={todo} isShow={isEditOpen} />
-          </div>
-    
-          
-          
-          
+        <section key={todo.id}>
+           <ToDoItem item={todo}/>
         </section>
-
 
 
       ))}

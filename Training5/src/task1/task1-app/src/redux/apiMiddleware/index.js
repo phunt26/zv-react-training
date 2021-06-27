@@ -52,7 +52,7 @@ const apiMiddleware = (store) => (next) => (action) => {
       // continue propagating the action through redux
       // this is our only call to next in this middleware
       next(action)
-
+   
       // fetch data from an API that may take a while to respond
       axios.put(`http://localhost:9000/todos/${action.payload.id}`, action.payload)
         .then(res => {
@@ -74,14 +74,14 @@ const apiMiddleware = (store) => (next) => (action) => {
     // continue propagating the action through redux
     // this is our only call to next in this middleware
     next(action)
-        console.log(action.payload)
+ 
     // fetch data from an API that may take a while to respond
-    axios.delete(`http://localhost:9000/todos/${action.payload}`,{ params: { userId })
+    axios.delete(`http://localhost:9000/todos/${action.payload.id}`,action.payload)
       .then(res => {
 
-        console.log(res.data);
+     
         // successfully received data, dispatch a new action with our data
-        store.dispatch(actions.deleteTodo.deleteTodoSuccess(res.data))
+        store.dispatch(actions.deleteTodo.deleteTodoSuccess(action.payload))
       })
       .catch(err => {
         // received an error from the API, dispatch a new action with an error
